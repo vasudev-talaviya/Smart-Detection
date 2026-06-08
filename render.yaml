@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: smart-detection-backend
+    env: python
+    region: ohio
+    plan: starter # Starter plan recommended due to ML memory requirements
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: MONGODB_URL
+        sync: false # You must set this manually in the Render dashboard for security
+      - key: DATABASE_NAME
+        value: smartAI
+      - key: PYTHON_VERSION
+        value: 3.12.0
