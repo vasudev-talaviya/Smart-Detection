@@ -6,7 +6,7 @@ pydantic-settings==2.2.1
 python-dotenv==1.0.1
 python-multipart
 insightface
-opencv-python
+opencv-python-headless
 torch
 librosa
 transformers
