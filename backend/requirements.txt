@@ -1,0 +1,13 @@
+fastapi==0.111.0
+uvicorn==0.29.0
+motor==3.6.0
+pydantic==2.7.1
+pydantic-settings==2.2.1
+python-dotenv==1.0.1
+python-multipart
+insightface
+opencv-python
+torch
+librosa
+transformers
+soundfile

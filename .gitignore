@@ -1,0 +1,25 @@
+# Node.js
+node_modules/
+
+# Python
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+
+# Environment variables
+.env
+.env.local
+
+# ML Models & Large Files (GitHub 100MB limit)
+*.safetensors
+*.bin
+*.pth
+*.pt
+*.onnx
+wavlm-base-plus-sv-local/
+
+# OS generated files
+.DS_Store
+Thumbs.db

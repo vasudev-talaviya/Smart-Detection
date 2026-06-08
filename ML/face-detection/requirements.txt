@@ -1,0 +1,17 @@
+dlib-bin
+scikit-learn
+
+insightface 
+onnxruntime
+
+
+numpy
+opencv-python
+
+matplotlib
+pillow
+
+pydantic
+pymongo
+
+python-dotenvjoblib

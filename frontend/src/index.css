@@ -1,0 +1,251 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Outfit', sans-serif;
+  }
+  
+  * {
+    scroll-behavior: smooth;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: oklch(var(--bc) / 0.2);
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: oklch(var(--bc) / 0.35);
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply rounded-2xl bg-base-100 shadow-xl;
+    border: 1px solid oklch(var(--bc) / 0.05);
+    backdrop-filter: blur(12px);
+  }
+
+  .stat-glow {
+    @apply relative overflow-hidden;
+  }
+  .stat-glow::before {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border-radius: 1rem;
+    filter: blur(24px);
+    opacity: 0.4;
+    background: linear-gradient(135deg, oklch(var(--p) / 0.25), transparent, oklch(var(--s) / 0.25));
+  }
+
+  .pulse-dot {
+    @apply w-2.5 h-2.5 rounded-full bg-success;
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  .fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
+  }
+
+  .slide-up {
+    animation: slideUp 0.5s ease-out forwards;
+  }
+
+  /* Premium Hover Effects */
+  .hover-lift {
+    @apply transition-all duration-300;
+  }
+  .hover-lift:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 20px 40px -10px oklch(var(--p) / 0.15), 0 0 15px 0 oklch(var(--s) / 0.1);
+  }
+
+  .glow-border {
+    position: relative;
+  }
+  .glow-border::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: inset 0 0 0 2px oklch(var(--p) / 0.3);
+    pointer-events: none;
+    transition: opacity 0.3s;
+    opacity: 0;
+  }
+  .glow-border:hover::after {
+    opacity: 1;
+    box-shadow: inset 0 0 0 2px oklch(var(--p));
+  }
+
+  /* Laser Scan Animation for Camera Frame */
+  .laser-scanner {
+    position: relative;
+    overflow: hidden;
+  }
+  .laser-scanner::after {
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, oklch(var(--p)), oklch(var(--s)), transparent);
+    box-shadow: 0 0 15px 5px oklch(var(--p) / 0.5);
+    animation: scan-laser 3s linear infinite;
+    z-index: 10;
+    opacity: 0.8;
+  }
+
+  /* 3D Cube Loader */
+  .cube-loader-wrapper {
+    perspective: 800px;
+    width: 64px;
+    height: 64px;
+  }
+  
+  .cube-loader {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: cube-spin 4s infinite linear;
+  }
+  
+  .cube-face {
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    background: oklch(var(--p) / 0.1);
+    border: 2px solid oklch(var(--p) / 0.8);
+    box-shadow: 0 0 15px oklch(var(--p) / 0.4), inset 0 0 15px oklch(var(--p) / 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+  }
+  
+  .cube-face::after {
+    content: "";
+    width: 30px;
+    height: 30px;
+    border: 2px solid oklch(var(--s) / 0.8);
+    border-radius: 50%;
+    animation: cube-pulse 1.5s infinite ease-in-out alternate;
+  }
+
+  .cube-face.front  { transform: translateZ(32px); }
+  .cube-face.back   { transform: rotateY(180deg) translateZ(32px); }
+  .cube-face.right  { transform: rotateY(90deg) translateZ(32px); }
+  .cube-face.left   { transform: rotateY(-90deg) translateZ(32px); }
+  .cube-face.top    { transform: rotateX(90deg) translateZ(32px); }
+  .cube-face.bottom { transform: rotateX(-90deg) translateZ(32px); }
+
+  /* 3D Liquid Navbar */
+  .liquid-navbar {
+    background: linear-gradient(135deg, oklch(var(--b1) / 0.7), oklch(var(--b2) / 0.8));
+    backdrop-filter: blur(20px) saturate(1.5);
+    border: 1px solid oklch(var(--bc) / 0.1);
+    box-shadow: 
+      0 10px 30px -10px oklch(var(--p) / 0.3),
+      inset 0 1px 0 oklch(var(--bc) / 0.1),
+      inset 0 -1px 2px oklch(var(--bc) / 0.05);
+  }
+
+  .liquid-tab {
+    position: relative;
+    overflow: hidden;
+    color: oklch(var(--bc) / 0.7);
+    z-index: 1;
+    border-radius: 12px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .liquid-tab:hover {
+    color: oklch(var(--bc));
+    background: oklch(var(--bc) / 0.05);
+  }
+
+  .liquid-tab.active {
+    color: oklch(var(--pc));
+    font-weight: 700;
+    box-shadow: 
+      0 4px 15px -3px oklch(var(--p) / 0.4),
+      inset 0 -3px 6px oklch(var(--p) / 0.6),
+      inset 0 2px 4px oklch(var(--p) / 0.2);
+    animation: liquid-blob 4s infinite alternate;
+  }
+
+  .liquid-tab.active::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, oklch(var(--p)), oklch(var(--p) / 0.8));
+    z-index: -1;
+  }
+
+  .liquid-tab.active::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 10%;
+    width: 80%;
+    height: 30%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.4), transparent);
+    border-radius: 50%;
+    z-index: -1;
+  }
+}
+
+@keyframes liquid-blob {
+  0% { border-radius: 16px 12px 18px 10px / 12px 18px 10px 16px; }
+  50% { border-radius: 12px 18px 10px 16px / 16px 12px 18px 10px; }
+  100% { border-radius: 18px 10px 16px 12px / 10px 16px 12px 18px; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scan-laser {
+  0% { top: -10%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { top: 110%; opacity: 0; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 oklch(var(--su) / 0.5); }
+  50%      { opacity: 0.7; box-shadow: 0 0 8px 4px oklch(var(--su) / 0); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* 3D Cube Loader Keyframes */
+@keyframes cube-spin {
+  0%   { transform: rotateX(-30deg) rotateY(0deg) rotateZ(0deg); }
+  100% { transform: rotateX(-30deg) rotateY(360deg) rotateZ(360deg); }
+}
+
+@keyframes cube-pulse {
+  0%   { transform: scale(0.8); opacity: 0.5; }
+  100% { transform: scale(1.2); opacity: 1; border-color: oklch(var(--a) / 0.8); }
+}
