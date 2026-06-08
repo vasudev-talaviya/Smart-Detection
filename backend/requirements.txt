@@ -11,3 +11,8 @@ torch
 librosa
 transformers
 soundfile
+scikit-learn
+torchaudio
+onnxruntime
+pillow
+matplotlib
